@@ -15,20 +15,18 @@ def playerMakeMenu
 	
 	while classSelect == false do
 	
-		puts "1--> Marksman"
-		puts "2--> Rifleman"
-		puts "3--> Scout"
-		puts "4--> Sniper"
-		puts "5--> Machine Gunner"
+		puts "1--> Soldier - a battle ready fighter with no equal in combat."
+		puts "2--> Scout - an explorer most at home on the fringes of space."
+		puts "3--> Scoundrel - a skillful rogue that gets by on stealth and guile."
 		
 		$class = gets.chomp
 		
 		if $class == "1"
 		
-			puts "You have chosen the Marksman class"
-			puts "The marksman is a medium to long range soldier"
+			puts "You have chosen the Soldier class"
+			puts "The soldier has high health and can use all types of armor."
 		
-			puts "Are you sure you want to be a marksman? y/n"
+			puts "Are you sure you want to be a soldier? y/n"
 			confirm = gets.chomp
 			
 			if confirm == "y"
@@ -39,8 +37,8 @@ def playerMakeMenu
 			
 		elsif $class == "2"
 		
-			puts "You have chosen the Rifleman class"
-			puts "The rifleman is a close to medium range soldier with usually armed with automatic rifle."
+			puts "You have chosen the Scout class"
+			puts "The scout is a good balance of health, armor and speed."
 		
 			puts "Are you sure you want to be a rifleman? y/n"
 			confirm = gets.chomp
@@ -53,41 +51,11 @@ def playerMakeMenu
 			
 		elsif $class == "3"
 		
-			puts "You have chosen the Scout class"
-			puts "The scout is effective at either short or long ranges, depending on how they choose their loadout."		
+			puts "You have chosen the Scoundrel class"
+			puts "The scoundrel can only use light armor, and has relatively low health, but is much more agile and crafty than the other classes."		
 			
-			puts "Are you sure you want to be a scout? y/n"
+			puts "Are you sure you want to be a scoundrel? y/n"
 						
-			confirm = gets.chomp
-			
-			if confirm == "y"
-			
-				classSelect = true
-				
-			end
-			
-			
-		elsif $class == "4"
-		
-			puts "You have chosen the Sniper class"
-			puts "Snipers are capable of long range fire with very large weapons"
-		
-			puts "Are you sure you want to be a sniper? y/n"
-			confirm = gets.chomp
-			
-			if confirm == "y"
-			
-				classSelect = true
-				
-			end
-			
-			
-		elsif $class == "5"
-		
-			puts "You have chosen the Machine gunner class"
-			puts "Machine gunners are very effective at close to medium range but are the slowest of all the classes"
-		
-			puts "Are you sure you want to be a machine gunner? y/n"
 			confirm = gets.chomp
 			
 			if confirm == "y"
@@ -105,55 +73,117 @@ end
 #Allocates the user traits
 def allocateTraits
 
-	if $class == 1 #Marksman
-		$str=11
-		$dex=12
-		$con=11
-		$int=11
-		$wis=10
-		$cha=10
+	if $class == "1" #Soldier
+		$lvl=1	#character level
+		$str=8	#Strength
+		$dex=8	#dexterity
+		$con=8	#constitution
+		$int=8	#intelligence
+		$wis=8	#wisdom
+		$cha=8	#charisma	
+		$maxVit=10 #vitality
+		$vit=10
+		$atk=$lvl #base attack
+		$defenseBonus=0 
 		
-		
 
-	elsif $class == 2 #Rifleman
-		$str=10
-		$dex=11
-		$con=11
-		$int=10
-		$wis=10
-		$cha=10
-
-	elsif $class == 3 #Scout
-		$str=10
-		$dex=10
-		$con=10
-		$int=10
-		$wis=10
-		$cha=10
-
-	elsif $class == 4 #Sniper
-		$str=10
-		$dex=10
-		$con=10
-		$int=10
-		$wis=10
-		$cha=10
-
-	elsif $class == 5 #Machine Gunner
-		$str=14
+	elsif $class == 2 #Scout
+		$lvl=1	
+		$str=8
 		$dex=8
-		$con=12
-		$int=9
-		$wis=10
-		$cha=10
+		$con=8
+		$int=8
+		$wis=8
+		$cha=8
+		$maxVit=8
+		$vit=8
+		$atk=($lvl*0.75) #base attack
+		$defenseBonus=2
+
+	elsif $class == 3 #Scoundrel
+		$str=8
+		$dex=8
+		$con=8
+		$int=8
+		$wis=8
+		$cha=8
+		$maxVit=6
+		$vit=6
+		$atk=($lvl*0.75) #base attack
+		$defenseBonus=4
+		
+	else
+		$vit = 6
+		$maxVit = 6
+	
 
 	end
 
 end
+
+def enemyCatalogue(enemy)
+
+	if enemy == "bad guy"
+	
+		stats=["bad guy",1,8,8,8,8,8,8,10,1,0]
+		#name,lvl,str,dex,con,int,wis,cha,vit,atk,defenseBonus
+		#  0   1   2   3   4   5   6   7   8   9       10
+	
+	end
+	
+	return (stats)
+
+
+end
+
+def battleTest(en)
+
+	puts "an enemy approaches! "
+	print en[0]
+	puts " prepares to attack!"
+	puts ""
+	
+
+	battleOver=0
+	
+	while battleOver==0 do
+	
+		print $name," HP: ", $vit,"/",$maxVit
+		puts ""
+		print en[0]," HP: ", en[8]
+		
+		puts
+		"
+		#########################################
+		# 1. Attack                2. Feats     #
+		# 3. Items                 4. Talk		#
+		# 5. Flee								#
+		#										#
+		#										#
+		#										#
+		#										#
+		#########################################
+	
+		"
+		sleep(10)
+	
+	end
+
+end
+
 
 puts hello
 
 print "hello ", $name,"\n"
 
 puts playerMakeMenu
+puts allocateTraits
+
+enemyReq = "bad guy"
+enemy1= enemyCatalogue(enemyReq)
+
+
+
+puts battleTest(enemy1)
+
 
